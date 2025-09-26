@@ -1,7 +1,7 @@
-import { supabase,Article,NewArticle,UpdateArticle  } from '@/lib/supabaseclient';
+import { Article,NewArticle,UpdateArticle  } from '@/lib/modetypes';
+import { supabase } from '@/utils/supabase/server';
 
 export class ArticleService {
-
   static async getArticles(): Promise<Article[]> {
     const { data, error } = await supabase
       .from('articles')
