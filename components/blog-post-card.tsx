@@ -1,15 +1,8 @@
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import { Post } from "@/lib/modetypes"
 
-interface Post {
-  id: number
-  title: string
-  excerpt: string
-  date: string
-  author: string
-  slug: string
-}
 
 interface BlogPostCardProps {
   post: Post

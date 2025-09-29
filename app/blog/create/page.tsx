@@ -9,16 +9,21 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import Link from "next/link"
+import {insertArticle} from './actions'
+
 
 export default function CreateBlogPost() {
   const [title, setTitle] = useState("")
   const [content, setContent] = useState("")
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit =async (e: React.FormEvent) => {
     e.preventDefault()
     // 这里会处理博客文章的创建逻辑
     // 在实际应用中，这里会发送请求到后端 API
-    alert(`文章已创建：${title}`)
+    // alert(`文章已创建：${title}`)
+ await insertArticle(title,content)
+ 
+
   }
 
   return (

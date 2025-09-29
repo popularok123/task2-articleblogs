@@ -41,24 +41,24 @@ export type Database = {
     Tables: {
       articles: {
         Row: {
-          author_id: string | null
-          content: string | null
+          author_id: string  | null
+          content: string  | null
           created_at: string
           id: number
           slug: string
           title: string
         }
         Insert: {
-          author_id?: string | null
-          content?: string | null
+          author_id?: string  | null
+          content?: string  | null
           created_at?: string
           id?: number
           slug: string
           title: string
         }
         Update: {
-          author_id?: string | null
-          content?: string | null
+          author_id?: string  | null
+          content?: string  | null
           created_at?: string
           id?: number
           slug?: string

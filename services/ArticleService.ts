@@ -1,10 +1,11 @@
 import { Article,NewArticle,UpdateArticle  } from '@/lib/modetypes';
-import { supabase } from '@/utils/supabase/server';
+import { createClient } from '@/utils/supabase/server';
 
 export class ArticleService {
   static async getArticles(): Promise<Article[]> {
+    const supabase = await createClient()
     const { data, error } = await supabase
-      .from('articles')
+      .from('articles').select()
       .select('id, title, slug, created_at,content, author_id')
       .order('created_at', { ascending: false })
 
@@ -13,6 +14,7 @@ export class ArticleService {
   }
 
   static async getArticleBySlug(slug: string): Promise<Article | null> {
+      const supabase = await createClient()
     const { data, error } = await supabase
       .from('articles')
       .select('*')
@@ -23,7 +25,8 @@ export class ArticleService {
     return data
   }
 
-  static async createArticle(articleData: Omit<NewArticle, "author_id">): Promise<Article> { 
+  static async createArticle(articleData: Partial<NewArticle>): Promise<Article> { 
+      const supabase = await createClient()
     const { data, error } = await supabase
       .from('articles')
       .insert([articleData])
@@ -35,6 +38,7 @@ export class ArticleService {
   }
 
   static async updateArticle(id: number,  updateData: Partial<UpdateArticle>) {
+      const supabase = await createClient()
     const { data, error } = await supabase
       .from('articles')
       .update(updateData)
@@ -47,6 +51,7 @@ export class ArticleService {
   }
 
   static async deleteArticle(id: number) {
+      const supabase = await createClient()
     const { error } = await supabase
       .from('articles')
       .delete()
