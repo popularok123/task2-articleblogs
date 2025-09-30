@@ -28,6 +28,11 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
             阅读全文
           </Button>
         </Link>
+        <Link href={`/blog/${post.slug}/edit`} className="w-full">
+          <Button variant="outline" className="w-full">
+            编辑全文
+          </Button>
+        </Link>
       </CardFooter>
     </Card>
   )

@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { ArticleService } from "@/services/ArticleService"
 import { Post } from "@/lib/modetypes"
+import  Pagination  from "@/components/pagination"
 
 // 模拟博客文章数据
 // const posts = [
@@ -33,9 +34,9 @@ import { Post } from "@/lib/modetypes"
 //   },
 // ]
 
-async function getPosts():Promise<Post[]> {
+async function getPosts(page:number):Promise<Post[]> {
  const posts:Post[] = []
- const articles = await ArticleService.getArticles()
+ const articles = await ArticleService.getArticleByPage(page)
     articles.forEach(article => {
       posts.push({
         id: article.id,
@@ -49,9 +50,20 @@ async function getPosts():Promise<Post[]> {
     return posts
 }
 
-export default async function Home() {
+export default async function Home(props: {
+  searchParams?: Promise<{
+    query?:string;
+    page?: string;
+  }>;})
+{
 
-  const posts = await getPosts();
+    const searchParams = await props.searchParams;
+
+  const currentPage = parseInt(searchParams?.page || '1', 10) || 1;
+
+  const totalPages = await ArticleService.getArticlePages();
+
+  const posts = await getPosts(currentPage);
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -76,6 +88,8 @@ export default async function Home() {
           ))}
         </div>
       </section>
+
+      <Pagination totalPages={totalPages} />
     </div>
   )
 }

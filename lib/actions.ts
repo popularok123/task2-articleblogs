@@ -2,6 +2,7 @@
 import { revalidatePath } from 'next/cache';
 import {redirect} from 'next/navigation';
 import { ArticleService } from "@/services/ArticleService"
+import { Article } from "@/lib/modetypes";
 
 export async function insertArticle(title: string, content: string) {
    const artd = await ArticleService.createArticle({
@@ -17,10 +18,10 @@ export async function insertArticle(title: string, content: string) {
   redirect('/');
 }
 
-export async function updateArticle(slug:string,
+export async function updateArticle(post:Article,
   formData: FormData,
 ) {
-  await ArticleService.updateArticleBySlug(slug, {
+  await ArticleService.updateArticleBySlug(post.slug, {
     title: formData.get('title') as string,
     content: formData.get('content') as string,
   })
