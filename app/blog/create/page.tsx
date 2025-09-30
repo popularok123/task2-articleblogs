@@ -9,7 +9,6 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import Link from "next/link"
-import {insertArticle} from '@/lib/actions'
 
 
 export default function CreateBlogPost() {
@@ -18,11 +17,15 @@ export default function CreateBlogPost() {
 
   const handleSubmit =async (e: React.FormEvent) => {
     e.preventDefault()
-    // 这里会处理博客文章的创建逻辑
-    // 在实际应用中，这里会发送请求到后端 API
-    // alert(`文章已创建：${title}`)
- await insertArticle(title,content)
- 
+    const url ="/api/blog";
+    const method = "POST";
+
+    await fetch(url, {
+      method,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title, content }),
+    });
+ window.location.href = "/";
 
   }
 

@@ -1,6 +1,4 @@
 'use server'
-import { revalidatePath } from 'next/cache';
-import {redirect} from 'next/navigation';
 import { ArticleService } from "@/services/ArticleService"
 import { Article } from "@/lib/modetypes";
 
@@ -13,9 +11,6 @@ export async function insertArticle(title: string, content: string) {
     author_id:'1378d07b-d2ec-4497-95fc-915b969bfdb2'
   })
   console.log(artd)
-
-  revalidatePath('/');
-  redirect('/');
 }
 
 export async function updateArticle(post:Article,
@@ -25,7 +20,4 @@ export async function updateArticle(post:Article,
     title: formData.get('title') as string,
     content: formData.get('content') as string,
   })
-
-   revalidatePath('/');
-  redirect('/');
 }

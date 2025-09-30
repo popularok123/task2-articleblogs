@@ -52,12 +52,11 @@ async function getPosts(page:number):Promise<Post[]> {
 
 export default async function Home(props: {
   searchParams?: Promise<{
-    query?:string;
     page?: string;
   }>;})
 {
 
-    const searchParams = await props.searchParams;
+  const searchParams = await props.searchParams;
 
   const currentPage = parseInt(searchParams?.page || '1', 10) || 1;
 
