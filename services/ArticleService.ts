@@ -76,6 +76,17 @@ export class ArticleService {
     return data
   }
 
+  static async deleteArticleBySlug(slug: string) {
+      const supabase = await createClient()
+    const { error } = await supabase
+      .from('articles')
+      .delete()
+      .eq('slug', slug)
+
+    if (error) throw new Error(error.message)
+    return true
+  }
+
   static async updateArticle(id: number,  updateData: Partial<UpdateArticle>) {
       const supabase = await createClient()
     const { data, error } = await supabase

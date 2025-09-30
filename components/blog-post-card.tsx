@@ -2,6 +2,7 @@ import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { Post } from "@/lib/modetypes"
+import {DeleteButton} from "./delbutton"
 
 
 interface BlogPostCardProps {
@@ -25,14 +26,20 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
       <CardFooter>
         <Link href={`/blog/${post.slug}`} className="w-full">
           <Button variant="outline" className="w-full">
-            阅读全文
+            全文
           </Button>
         </Link>
         <Link href={`/blog/${post.slug}/edit`} className="w-full">
           <Button variant="outline" className="w-full">
-            编辑全文
+            编辑
           </Button>
         </Link>
+        <DeleteButton slug={post.slug} />
+        {/* <Link href={`/api/blog/${post.slug}/delete`} className="w-full"> */}
+          {/* <Button variant="outline" className="w-full">
+            删除
+          </Button> */}
+        {/* </Link> */}
       </CardFooter>
     </Card>
   )

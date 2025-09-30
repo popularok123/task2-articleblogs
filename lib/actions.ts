@@ -21,3 +21,12 @@ export async function updateArticle(post:Article,
     content: formData.get('content') as string,
   })
 }
+
+export async function deleteArticle(slug:string): Promise<Error> {
+  try{
+    await ArticleService.deleteArticleBySlug(slug)
+  } catch(e){
+    return e as Error
+  }
+  return new Error('')
+}
