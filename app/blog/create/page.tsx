@@ -25,8 +25,7 @@ export default function CreateBlogPost() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ title, content }),
     });
- window.location.href = "/";
-
+    window.location.href = "/";
   }
 
   return (
