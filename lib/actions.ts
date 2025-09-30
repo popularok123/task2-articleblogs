@@ -13,6 +13,18 @@ export async function insertArticle(title: string, content: string) {
   })
   console.log(artd)
 
-  revalidatePath('/blog');
-  redirect('/blog');
+  revalidatePath('/');
+  redirect('/');
+}
+
+export async function updateArticle(slug:string,
+  formData: FormData,
+) {
+  await ArticleService.updateArticleBySlug(slug, {
+    title: formData.get('title') as string,
+    content: formData.get('content') as string,
+  })
+
+   revalidatePath('/');
+  redirect('/');
 }

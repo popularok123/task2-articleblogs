@@ -13,7 +13,7 @@ export class ArticleService {
     return data || []
   }
 
-  static async getArticleBySlug(slug: string): Promise<Article | null> {
+  static async getArticleBySlug(slug: string): Promise<Article> {
       const supabase = await createClient()
     const { data, error } = await supabase
       .from('articles')
@@ -30,6 +30,19 @@ export class ArticleService {
     const { data, error } = await supabase
       .from('articles')
       .insert([articleData])
+      .select()
+      .single()
+
+    if (error) throw new Error(error.message)
+    return data
+  }
+
+   static async updateArticleBySlug(slug: string,  updateData: Partial<UpdateArticle>) {
+      const supabase = await createClient()
+    const { data, error } = await supabase
+      .from('articles')
+      .update(updateData)
+      .eq('slug', slug)
       .select()
       .single()
 

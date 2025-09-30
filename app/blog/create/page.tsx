@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import Link from "next/link"
-import {insertArticle} from './actions'
+import {insertArticle} from '@/lib/actions'
 
 
 export default function CreateBlogPost() {
